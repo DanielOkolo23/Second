@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Show Environment (for debugging)
           command: |
-            echo "✅ OPENAI_API_KEY starts with: ${OPENAI_API_KEY:0:8}"
+            echo "✅ OPENAI_API_KEY starts with: ${OPENAI_API_KEY:0:5}"
 
       - run:
           name: Run AI Summarizer Script
