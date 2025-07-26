@@ -13,6 +13,6 @@ echo "📁 Verifying working directory contents..."
 ls -l
 
 echo "🤖 Running AI summarizer..."
-python error_summarizer.py
+python error_summarizer_agent.py
 
 echo "✅ Done. Summary saved to error_summary.md"
