@@ -5,12 +5,7 @@ executors:
     docker:
       - image: cimg/python:3.10  # ✅ CircleCI official Python image
     environment:
-      OPENAI_API_KEY: << pipeline.parameters.openai_api_key >>
-
-parameters:
-  openai_api_key:
-    type: env_var_name
-    default: OPENAI_API_KEY
+      OPENAI_API_KEY: ${OPENAI_API_KEY}  # use env var directly
 
 jobs:
   run-ai-summarizer:
