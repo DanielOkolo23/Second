@@ -1,0 +1,45 @@
+version: 2.1
+
+executors:
+  python-executor:
+    docker:
+      - image: cimg/python:3.10  # ✅ CircleCI official Python image
+    environment:
+      OPENAI_API_KEY: << pipeline.parameters.openai_api_key >>
+
+parameters:
+  openai_api_key:
+    type: env_var_name
+    default: OPENAI_API_KEY
+
+jobs:
+  run-ai-summarizer:
+    executor: python-executor
+    steps:
+      - checkout  # ✅ Pull the latest code from GitHub
+
+      - run:
+          name: Prepare Error Log File
+          command: |
+            echo "📝 Preparing error log file..."
+            cp sample_error_log.txt error_log.txt
+
+      - run:
+          name: Make Script Executable and Run
+          command: |
+            echo "✅ Making summarizer script executable..."
+            chmod +x run_summarizer.sh
+            echo "🤖 Running AI summarizer..."
+            bash run_summarizer.sh
+
+      - run:
+          name: Display AI Summary
+          command: |
+            echo "===== 🧠 AI-Generated Summary ====="
+            cat error_summary.md
+            echo "==================================="
+
+workflows:
+  run-ai-agent:
+    jobs:
+      - run-ai-summarizer
